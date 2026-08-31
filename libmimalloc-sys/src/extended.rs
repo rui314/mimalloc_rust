@@ -236,7 +236,14 @@ extern "C" {
     /// Checked free: If `p` came from mimalloc's heap (as decided by
     /// [`mi_is_in_heap_region`]), this is [`mi_free(p)`](crate::mi_free), but
     /// otherwise it is a no-op.
+    #[cfg(feature = "v2")]
     pub fn mi_cfree(p: *mut c_void);
+
+    /// Checked free: If `p` came from mimalloc's heap (as decided by
+    /// [`mi_is_in_heap_region`]), free it and return `true`; otherwise leave it
+    /// untouched and return `false`.
+    #[cfg(not(feature = "v2"))]
+    pub fn mi_cfree(p: *mut c_void) -> bool;
 
     /// Returns true if this is a pointer into a memory region that has been
     /// reserved by the mimalloc heap.
