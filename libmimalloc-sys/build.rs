@@ -116,12 +116,8 @@ fn main() {
 
     build.compile("mimalloc");
 
-    // On armv6 and on targets without 64-bit atomics, such as 32-bit
-    // PowerPC, C compilers implement mimalloc's 64-bit atomics as calls
-    // into libatomic.
-    let has_atomic64 = env::var("CARGO_CFG_TARGET_HAS_ATOMIC")
-        .is_ok_and(|widths| widths.split(',').any(|w| w == "64"));
-    if target_os == "linux" && (target_arch == "arm" || !has_atomic64) {
+    // on armv6 we need to link with libatomic
+    if target_os == "linux" && target_arch == "arm" {
         // Embrace the atomic capability library across various platforms.
         // For instance, on certain platforms, llvm has relocated the atomic of the arm32 architecture to libclang_rt.builtins.a
         // while some use libatomic.a, and others use libatomic_ops.a.
