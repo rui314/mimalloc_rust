@@ -8,7 +8,7 @@ publish = false
 
 [dependencies]
 libc = { version = "^0.2.186", default-features = false }
-libmimalloc-sys = { path = "../libmimalloc-sys" }
+libmimalloc-sys = { package = "mold-mimalloc-sys", path = "../libmimalloc-sys" }
 
 [build-dependencies]
 cc = "^1.2.60"

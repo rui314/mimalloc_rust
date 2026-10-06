@@ -1,5 +1,5 @@
 [package]
-name = "mimalloc"
+name = "mold-mimalloc"
 version = "0.1.52"
 authors = [
     "Octavian Oncescu <octavonce@gmail.com>",
@@ -7,10 +7,10 @@ authors = [
     "Thom Chiovoloni <chiovolonit@gmail.com>",
 ]
 edition = "2018"
-repository = "https://github.com/purpleprotocol/mimalloc_rust"
+repository = "https://github.com/rui314/mimalloc_rust"
 keywords = ["mimalloc", "allocator", "encrypted-heap", "performance"]
 categories = ["memory-management", "api-bindings"]
-description = "Performance and security oriented drop-in allocator"
+description = "Fork of the mimalloc crate that bundles mimalloc 3.5.3, for the mold linker"
 license = "MIT"
 readme = "README.md"
 
@@ -25,7 +25,7 @@ members = [
 travis-ci = { repository = "purpleprotocol/mimalloc_rust" }
 
 [dependencies]
-libmimalloc-sys = { path = "libmimalloc-sys", version = "0.1.49", default-features = false }
+libmimalloc-sys = { package = "mold-mimalloc-sys", path = "libmimalloc-sys", version = "0.1.49", default-features = false }
 
 [features]
 default = []
